@@ -13,7 +13,7 @@ class App extends Component {
     };
 
     // this.handlechange = this.handlechange.bind(this) 
-    // This line above can be omited because arrow function on handlechange will let it go through this.state right away without binding it to handlechange to this.
+    // This line above can be omited because arrow function on handlechange will let it go through this.state right away without binding it to handlechange to this. Because it goes through window scope through arrow function.
   }
 
   componentDidMount(){
@@ -38,6 +38,7 @@ class App extends Component {
       );
      return (
     <div className="App">
+      <h1>Monster Rolodex</h1>
       <SearchBox 
         placeholder='search monsters'
         handlechange={this.handlechange}
