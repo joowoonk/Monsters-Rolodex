@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import CardList from "./components/card-list/card-list.component"
+import SearchBox from "./components/search-box/search-box.component"
+
 
 class App extends Component {
   constructor(){
@@ -9,12 +11,19 @@ class App extends Component {
       monsters: [],
       searchField:""
     };
+
+    // this.handlechange = this.handlechange.bind(this) 
+    // This line above can be omited because arrow function on handlechange will let it go through this.state right away without binding it to handlechange to this.
   }
 
   componentDidMount(){
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => this.setState({monsters: users}))
+  }
+
+  handlechange = (e) =>{
+    this.setState({searchField: e.target.value})
   }
  
 
@@ -29,13 +38,11 @@ class App extends Component {
       );
      return (
     <div className="App">
-      <input 
-        type='serach' 
-        placeholder="serch monsters" 
-        onChange={e => {
-          this.setState({ searchField: e.target.value});
+      <SearchBox 
+        placeholder='search monsters'
+        handlechange={this.handlechange}
 
-        }} />
+      />
 
       <CardList monsters = {filteredMonsters} /> 
      
